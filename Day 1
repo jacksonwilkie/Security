@@ -23,7 +23,7 @@ ssh -S /tmp/gray gray -O forward -L 41899:192.168.28.111:80 (Creates Local port 
 ssh -S /tmp/gray gray -O forward -L 41898:192.168.28.111:22 (Creates Local port forward on port 22)
 
 Cancel the Dynamic Tunnel
-ssh -S /tmp/gray gray -O cancel -L 41899:192.168.28.111:80 (Only cancel your mocket when you want to change your Dynamic Port Forwards)
+ssh -S /tmp/gray gray -O cancel-D9050
 
 ssh -MS  sh 0MS /tmp/comrade comrad@127.0.0.1 -p 41898 (USES THE -P 41898 TO REFERENCE PORT OPEN FROM THE /tmp/gray MASTER SOCKET)
 
