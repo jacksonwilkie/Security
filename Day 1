@@ -9,7 +9,7 @@ proxychains nmap -v -sT -Pn -T4 -sV 192.168.28.111 -p-
 
 ssh -S /tmp/gray gray -O forward -L 41899:192.168.28.111:80 (Creates Local port forward on port 80)
 ssh -S /tmp/gray gray -O forward -L 41898:192.168.28.111:22 (Creates Local port forward on port 22)
-
+ proxychains nmap -v -sT -Pn -T4 --script=http-enum.nse 192/168/28.111 -p 80
 
 firefox 
 http://127.0.0.1:41899/
@@ -29,5 +29,3 @@ ssh -MS  sh 0MS /tmp/comrade comrad@127.0.0.1 -p 41898 (USES THE -P 41898 TO REF
 
 Set up a new Dynamic Tunnel
 ssh -S /tmp/comrade comrade -O forward -D9050
-
- proxychains nmap -v -sT -Pn -T4 --script=http-enum.nse 192/168/28.111 -p 80
