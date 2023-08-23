@@ -1,1 +1,14 @@
+Ping Sweep
 for i in {1..254}; do (ping -c 1 192.168.28.$i | grep "bytes from" &); done
+ 
+ssh -MS /tmp/gray student@10.50.37.202
+ssh -S /tmp/gray gray -O forward -D9050
+
+scanning from lin ops on jump 
+proxychains nmap -v -sT -Pn -T4 -sV 192.168.28.111 -p-
+
+ssh -S /tmp/gray gray -O forward -L 41899:192.168.28.111:80
+
+firefox 
+http://127.0.0.1:41899/
+
