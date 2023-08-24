@@ -29,3 +29,7 @@ ssh -MS  sh 0MS /tmp/comrade comrad@127.0.0.1 -p 41898 (USES THE -P 41898 TO REF
 
 Set up a new Dynamic Tunnel
 ssh -S /tmp/comrade comrade -O forward -D9050
+
+smb os discovery
+
+nmap -Pn -T4 -sV --script=smb-os-discovery <ip>
