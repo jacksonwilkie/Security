@@ -1,2 +1,6 @@
  scp student@10.50.37.2:~/192.168.28.111/longTermStorage/sdst2.exe . 
 proxychains scp -P2222 comrade@192.168.28.111:/.hidden/inventory.exe .
+
+putting a file from your machine onto a different machine
+LIN -> comrade from LIN
+scp -P <port for tunnel> <absolute path of file u wanna transfer> <comrade@127.0.0.1>:whereuwannago,if you dont givr a shit just give period
