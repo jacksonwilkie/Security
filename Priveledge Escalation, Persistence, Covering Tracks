@@ -171,7 +171,8 @@ $(Get-Item file.ext).lastwritetime=$(date) |$(Get-Item test.txt).lastwritetime=$
     # Sets the date and time as specified
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                                                DEMO 
+                                                         DEMO
+Things to have open: Services, ProcMon, Task Scheduler
 Task Scheduler, find a file
 Go to file directory 
 write to file check by making new test.txt
