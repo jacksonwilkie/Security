@@ -20,3 +20,7 @@ and found passwords. Passwords are either going to be in ROT13 or Base64, conver
 AARON: apasswordyPa$$word
 user2:EaglesIsARE78
 user3:Bob4THEEapples
+
+
+passwords did not work, so I scanned the network I got from the second website from the target box.
+for i in {1..254}; do (ping -c 1 192.168.28.$i | grep "bytes from" &); done
