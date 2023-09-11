@@ -1,5 +1,7 @@
 10.50.29.85:8000
 
+xfreerdp /u:student /p:password /dynamic-resolution +glyph-cache +clipboard +glyph-cache /v:10.50.30.113
+
 10.50.37.23
 MAKE THE MASTER SOCKET ON YOUR LIN OPS SINCE THERE IS NO JUMP BOX
 nmap <ip>
