@@ -49,4 +49,16 @@ user3:Bob4THEEapples
 
 yeah just ssh in
 
+look at /etc/passwd
+cat /etc/hosts
+even do arp -a
+find / -type f -perm (that command, its in student guide and go to GTFO bins)
+even do sudo -l and see what you find
+abuse it with GTFO BINS
+exploit  the other box found on the first box, which you would find with ping sweeping the network, with nmap.
+now make a tunnel to vulnerable port , banner grab the ports nc ip port
+once you hit that windows, use the msfvenom commands with multi handler
+then use xfreerdp on it
+xfreerdp /u:user p:/password /dynamic-resolution +clipboard /v:127.0.0.1:port made for rdp tunnel
+
 
