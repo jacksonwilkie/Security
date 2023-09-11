@@ -60,5 +60,28 @@ now make a tunnel to vulnerable port , banner grab the ports nc ip port
 once you hit that windows, use the msfvenom commands with multi handler
 then use xfreerdp on it
 xfreerdp /u:user p:/password /dynamic-resolution +clipboard /v:127.0.0.1:port made for rdp tunnel
+ if you get error code, delete the contents of the file shown
 
+once you get on look at 
+services, scheduled tasks, and registry
 
+find exe in services or task scheduler
+tasklist /svc | find "(service)"
+
+find the pid and coorelate the network connection with
+netstat -ano | findstr "pid"
+could banner grab it as well
+
+even look at the windows defender
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+--------------------------------------------------------------RECAP---------------------------------------------------------------------------------------
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Every linux box: /etc/passwd, /etc/hosts, cat out user directories, /etc/crontabs, /tmp, find / perm command, look in any scripts found if possible
+                                                                            
+                                                                    port 22 open
+          _---------------------------------------------------------->192.168.28.172
+Lin OPS -/-> user2 /---------------------------->192.168.28.181
+          nmap http-enum scan                    ports 80 and 22 open
+          cat /etc/hosts                         http-enum scan, scanning new network
+          Master Socket made                     SQL 
+          nmap found ports 22 and 80                
