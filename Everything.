@@ -1,0 +1,33 @@
+Ping Sweep
+for i in {1..254}; do (ping -c 1 192.168.28.$i | grep "bytes from" &); done
+ 
+ssh -MS /tmp/gray student@10.50.37.202
+ssh -S /tmp/gray gray -O forward -D9050
+
+scanning from lin ops on jump 
+proxychains nmap -v -sT -Pn -T4 -sV 192.168.28.111 -p-
+
+ssh -S /tmp/gray gray -O forward -L 41899:192.168.28.111:80 (Creates Local port forward on port 80)
+ssh -S /tmp/gray gray -O forward -L 41898:192.168.28.111:22 (Creates Local port forward on port 22)
+ proxychains nmap -v -sT -Pn -T4 --script=http-enum.nse 192/168/28.111 -p 80
+
+firefox 
+http://127.0.0.1:41899/
+ssh -S /tmp/gray gray -O cancel -L 41899:192.168.28.111:80 (Only cancel your mocket when you want to change your Dynamic Port Forwards)
+
+
+Master Socket referencing a previous Master Socket to get to the next network:
+
+ssh -S /tmp/gray gray -O forward -L 41899:192.168.28.111:80 (Creates Local port forward on port 80)
+ssh -S /tmp/gray gray -O forward -L 41898:192.168.28.111:22 (Creates Local port forward on port 22)
+sh -MS  /tmp/comrade comrad@127.0.0.1 -p 41898 (USES THE -P 41898 TO REFERENCE PORT OPEN FROM THE /tmp/gray MASTER SOCKET)
+
+Cancel the Dynamic Tunnel
+ssh -S /tmp/gray gray -O cancel -D9050
+
+Set up a new Dynamic Tunnel
+ssh -S /tmp/comrade comrade -O forward -D9050
+
+smb os discovery
+
+nmap -Pn -T4 -sV --script=smb-os-discovery <ip>
